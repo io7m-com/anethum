@@ -238,6 +238,59 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
     throws IOException, ParseException
   {
     Objects.requireNonNull(file, "file");
+
     return this.parseFileWithContext(null, file);
+  }
+
+  /**
+   * Execute a parser for the given stream.
+   *
+   * @param source         The source
+   * @param stream         The stream
+   * @param statusConsumer A consumer of status events
+   *
+   * @return A new parser
+   *
+   * @throws ParseException On parse errors
+   */
+
+  default T parse(
+    final URI source,
+    final InputStream stream,
+    final Consumer<ParseStatus> statusConsumer)
+    throws ParseException
+  {
+    Objects.requireNonNull(source, "source");
+    Objects.requireNonNull(stream, "stream");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+
+    return this.createParser(source, stream, statusConsumer).execute();
+  }
+
+  /**
+   * Execute a parser for the given stream.
+   *
+   * @param source The source
+   * @param stream The stream
+   *
+   * @return A new parser
+   *
+   * @throws ParseException On parse errors
+   */
+
+  default T parse(
+    final URI source,
+    final InputStream stream)
+    throws ParseException
+  {
+    Objects.requireNonNull(source, "source");
+    Objects.requireNonNull(stream, "stream");
+
+    final Consumer<ParseStatus> statusConsumer =
+      parseStatus -> {
+
+      };
+
+    return this.createParser(source, stream, statusConsumer).execute();
   }
 }
