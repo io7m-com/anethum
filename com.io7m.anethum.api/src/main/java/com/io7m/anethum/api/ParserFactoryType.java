@@ -28,7 +28,9 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * A factory of parsers.
+ * A factory of parsers. Only the {@link #createParserWithContext(Object, URI, InputStream, Consumer)}
+ * method is necessarily implemented by providers: All other methods are merely
+ * convenience methods built atop this method.
  *
  * @param <C> The type of parser-specific context values
  * @param <T> The type of parsed values
