@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -54,6 +55,27 @@ public interface ParserFactoryType<C, T>
   );
 
   /**
+   * Create a new parser.
+   *
+   * @param source         The input source
+   * @param stream         The input stream
+   * @param statusConsumer A consumer of status events
+   *
+   * @return A new parser
+   */
+
+  default ParserType<T> createParser(
+    final URI source,
+    final InputStream stream,
+    final Consumer<ParseStatus> statusConsumer)
+  {
+    Objects.requireNonNull(source, "source");
+    Objects.requireNonNull(stream, "stream");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+    return this.createParser(null, source, stream, statusConsumer);
+  }
+
+  /**
    * Create a new parser for the given file.
    *
    * @param file           The file
@@ -71,8 +93,33 @@ public interface ParserFactoryType<C, T>
     final Consumer<ParseStatus> statusConsumer)
     throws IOException
   {
+    Objects.requireNonNull(file, "file");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+
     final var stream = Files.newInputStream(file);
     return this.createParser(context, file.toUri(), stream, statusConsumer);
+  }
+
+  /**
+   * Create a new parser for the given file.
+   *
+   * @param file           The file
+   * @param statusConsumer A consumer of status events
+   *
+   * @return A new parser
+   *
+   * @throws IOException On I/O errors
+   */
+
+  default ParserType<T> createParser(
+    final Path file,
+    final Consumer<ParseStatus> statusConsumer)
+    throws IOException
+  {
+    Objects.requireNonNull(file, "file");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+
+    return this.createParser(null, file, statusConsumer);
   }
 
   /**
@@ -94,9 +141,35 @@ public interface ParserFactoryType<C, T>
     final Consumer<ParseStatus> statusConsumer)
     throws IOException, ParseException
   {
+    Objects.requireNonNull(file, "file");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+
     try (var parser = this.createParser(context, file, statusConsumer)) {
       return parser.execute();
     }
+  }
+
+  /**
+   * Execute a parser for the given file.
+   *
+   * @param file           The file
+   * @param statusConsumer A consumer of status events
+   *
+   * @return A new parser
+   *
+   * @throws IOException    On I/O errors
+   * @throws ParseException On parse errors
+   */
+
+  default T parse(
+    final Path file,
+    final Consumer<ParseStatus> statusConsumer)
+    throws IOException, ParseException
+  {
+    Objects.requireNonNull(file, "file");
+    Objects.requireNonNull(statusConsumer, "statusConsumer");
+
+    return this.parse(null, file, statusConsumer);
   }
 
   /**
@@ -116,6 +189,8 @@ public interface ParserFactoryType<C, T>
     final Path file)
     throws IOException, ParseException
   {
+    Objects.requireNonNull(file, "file");
+
     final Consumer<ParseStatus> statusConsumer =
       parseStatus -> {
 
@@ -124,5 +199,24 @@ public interface ParserFactoryType<C, T>
     try (var parser = this.createParser(context, file, statusConsumer)) {
       return parser.execute();
     }
+  }
+
+  /**
+   * Execute a parser for the given file.
+   *
+   * @param file The file
+   *
+   * @return A new parser
+   *
+   * @throws IOException    On I/O errors
+   * @throws ParseException On parse errors
+   */
+
+  default T parse(
+    final Path file)
+    throws IOException, ParseException
+  {
+    Objects.requireNonNull(file, "file");
+    return this.parse(null, file);
   }
 }
