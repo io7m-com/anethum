@@ -23,6 +23,7 @@
   <modules>
     <module>com.io7m.anethum.common</module>
     <module>com.io7m.anethum.api</module>
+    <module>com.io7m.anethum.tests</module>
   </modules>
 
   <properties>
