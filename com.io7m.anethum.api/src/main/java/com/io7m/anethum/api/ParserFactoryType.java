@@ -34,7 +34,8 @@ import java.util.function.Consumer;
  * @param <T> The type of parsed values
  */
 
-public interface ParserFactoryType<C, T>
+@FunctionalInterface
+public interface ParserFactoryType<C, T, P extends ParserType<T>>
 {
   /**
    * Create a new parser.
@@ -47,7 +48,7 @@ public interface ParserFactoryType<C, T>
    * @return A new parser
    */
 
-  ParserType<T> createParser(
+  P createParserWithContext(
     C context,
     URI source,
     InputStream stream,
@@ -64,7 +65,7 @@ public interface ParserFactoryType<C, T>
    * @return A new parser
    */
 
-  default ParserType<T> createParser(
+  default P createParser(
     final URI source,
     final InputStream stream,
     final Consumer<ParseStatus> statusConsumer)
@@ -72,7 +73,13 @@ public interface ParserFactoryType<C, T>
     Objects.requireNonNull(source, "source");
     Objects.requireNonNull(stream, "stream");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
-    return this.createParser(null, source, stream, statusConsumer);
+
+    return this.createParserWithContext(
+      null,
+      source,
+      stream,
+      statusConsumer
+    );
   }
 
   /**
@@ -87,7 +94,7 @@ public interface ParserFactoryType<C, T>
    * @throws IOException On I/O errors
    */
 
-  default ParserType<T> createParser(
+  default P createParserForFileWithContext(
     final C context,
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
@@ -97,7 +104,12 @@ public interface ParserFactoryType<C, T>
     Objects.requireNonNull(statusConsumer, "statusConsumer");
 
     final var stream = Files.newInputStream(file);
-    return this.createParser(context, file.toUri(), stream, statusConsumer);
+    return this.createParserWithContext(
+      context,
+      file.toUri(),
+      stream,
+      statusConsumer
+    );
   }
 
   /**
@@ -111,7 +123,7 @@ public interface ParserFactoryType<C, T>
    * @throws IOException On I/O errors
    */
 
-  default ParserType<T> createParser(
+  default P createParser(
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
     throws IOException
@@ -119,7 +131,11 @@ public interface ParserFactoryType<C, T>
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
 
-    return this.createParser(null, file, statusConsumer);
+    return this.createParserForFileWithContext(
+      null,
+      file,
+      statusConsumer
+    );
   }
 
   /**
@@ -135,7 +151,7 @@ public interface ParserFactoryType<C, T>
    * @throws ParseException On parse errors
    */
 
-  default T parse(
+  default T parseFileWithContext(
     final C context,
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
@@ -144,7 +160,10 @@ public interface ParserFactoryType<C, T>
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
 
-    try (var parser = this.createParser(context, file, statusConsumer)) {
+    try (var parser = this.createParserForFileWithContext(
+      context,
+      file,
+      statusConsumer)) {
       return parser.execute();
     }
   }
@@ -161,7 +180,7 @@ public interface ParserFactoryType<C, T>
    * @throws ParseException On parse errors
    */
 
-  default T parse(
+  default T parseFile(
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
     throws IOException, ParseException
@@ -169,7 +188,7 @@ public interface ParserFactoryType<C, T>
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
 
-    return this.parse(null, file, statusConsumer);
+    return this.parseFileWithContext(null, file, statusConsumer);
   }
 
   /**
@@ -184,7 +203,7 @@ public interface ParserFactoryType<C, T>
    * @throws ParseException On parse errors
    */
 
-  default T parse(
+  default T parseFileWithContext(
     final C context,
     final Path file)
     throws IOException, ParseException
@@ -196,7 +215,8 @@ public interface ParserFactoryType<C, T>
 
       };
 
-    try (var parser = this.createParser(context, file, statusConsumer)) {
+    try (var parser = this.createParserForFileWithContext(
+      context, file, statusConsumer)) {
       return parser.execute();
     }
   }
@@ -212,11 +232,11 @@ public interface ParserFactoryType<C, T>
    * @throws ParseException On parse errors
    */
 
-  default T parse(
+  default T parseFile(
     final Path file)
     throws IOException, ParseException
   {
     Objects.requireNonNull(file, "file");
-    return this.parse(null, file);
+    return this.parseFileWithContext(null, file);
   }
 }
