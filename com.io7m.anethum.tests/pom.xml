@@ -9,7 +9,7 @@
   <parent>
     <artifactId>com.io7m.anethum</artifactId>
     <groupId>com.io7m.anethum</groupId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>com.io7m.anethum.tests</artifactId>
 
