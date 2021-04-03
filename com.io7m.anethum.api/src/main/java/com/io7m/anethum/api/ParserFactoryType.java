@@ -163,10 +163,8 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
 
-    try (var parser = this.createParserForFileWithContext(
-      context,
-      file,
-      statusConsumer)) {
+    try (var parser =
+           this.createParserForFileWithContext(context, file, statusConsumer)) {
       return parser.execute();
     }
   }
