@@ -9,14 +9,14 @@
   <parent>
     <artifactId>com.io7m.anethum</artifactId>
     <groupId>com.io7m.anethum</groupId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
   </parent>
   <artifactId>com.io7m.anethum.tests</artifactId>
 
   <packaging>jar</packaging>
   <name>com.io7m.anethum.tests</name>
   <description>Generic parser API (Test suite)</description>
-  <url>https://www.github.com/io7m/anethum</url>
+  <url>https://www.io7m.com/software/anethum</url>
 
   <properties>
     <mdep.analyze.skip>true</mdep.analyze.skip>
