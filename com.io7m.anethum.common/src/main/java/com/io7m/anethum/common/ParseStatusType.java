@@ -22,6 +22,7 @@ import com.io7m.jlexing.core.LexicalType;
 import org.immutables.value.Value;
 
 import java.net.URI;
+import java.util.Map;
 
 /**
  * A status event produced during parsing.
@@ -59,4 +60,14 @@ public interface ParseStatusType extends LexicalType<URI>
    */
 
   String message();
+
+  /**
+   * @return The extra data associated with the status values
+   */
+
+  @Value.Default
+  default Map<String, String> extraData()
+  {
+    return Map.of();
+  }
 }
