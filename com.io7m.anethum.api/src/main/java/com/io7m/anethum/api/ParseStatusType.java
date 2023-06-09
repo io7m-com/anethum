@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,42 +14,31 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.anethum.common;
+package com.io7m.anethum.api;
 
-import java.util.List;
-import java.util.Objects;
+import com.io7m.jlexing.core.LexicalPosition;
+import com.io7m.jlexing.core.LexicalType;
+import com.io7m.seltzer.api.SStructuredErrorType;
+
+import java.net.URI;
 
 /**
- * An exception due to parse errors.
+ * A status event produced during parsing.
  */
 
-public final class ParseException extends Exception
+public interface ParseStatusType
+  extends LexicalType<URI>, SStructuredErrorType<String>
 {
-  private final List<ParseStatus> statusValues;
-
   /**
-   * Construct an exception.
-   *
-   * @param message  The main message
-   * @param inErrors The parse errors
+   * @return The severity of a parse event
    */
 
-  public ParseException(
-    final String message,
-    final List<ParseStatus> inErrors)
-  {
-    super(Objects.requireNonNull(message, "message"));
-    this.statusValues = List.copyOf(
-      Objects.requireNonNull(inErrors, "errors")
-    );
-  }
+  ParseSeverity severity();
 
   /**
-   * @return The parse errors
+   * @return The lexical position
    */
 
-  public List<ParseStatus> statusValues()
-  {
-    return this.statusValues;
-  }
+  @Override
+  LexicalPosition<URI> lexical();
 }

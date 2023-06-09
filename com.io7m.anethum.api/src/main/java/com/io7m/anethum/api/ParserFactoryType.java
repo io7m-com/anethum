@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,9 +15,6 @@
  */
 
 package com.io7m.anethum.api;
-
-import com.io7m.anethum.common.ParseException;
-import com.io7m.anethum.common.ParseStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -151,14 +148,14 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    * @return A new parser
    *
    * @throws IOException    On I/O errors
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parseFileWithContext(
     final C context,
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
-    throws IOException, ParseException
+    throws IOException, ParsingException
   {
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
@@ -178,13 +175,13 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    * @return A new parser
    *
    * @throws IOException    On I/O errors
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parseFile(
     final Path file,
     final Consumer<ParseStatus> statusConsumer)
-    throws IOException, ParseException
+    throws IOException, ParsingException
   {
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(statusConsumer, "statusConsumer");
@@ -201,13 +198,13 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    * @return A new parser
    *
    * @throws IOException    On I/O errors
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parseFileWithContext(
     final C context,
     final Path file)
-    throws IOException, ParseException
+    throws IOException, ParsingException
   {
     Objects.requireNonNull(file, "file");
 
@@ -230,12 +227,12 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    * @return A new parser
    *
    * @throws IOException    On I/O errors
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parseFile(
     final Path file)
-    throws IOException, ParseException
+    throws IOException, ParsingException
   {
     Objects.requireNonNull(file, "file");
 
@@ -251,14 +248,14 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    *
    * @return A new parser
    *
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parse(
     final URI source,
     final InputStream stream,
     final Consumer<ParseStatus> statusConsumer)
-    throws ParseException
+    throws ParsingException
   {
     Objects.requireNonNull(source, "source");
     Objects.requireNonNull(stream, "stream");
@@ -275,13 +272,13 @@ public interface ParserFactoryType<C, T, P extends ParserType<T>>
    *
    * @return A new parser
    *
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   default T parse(
     final URI source,
     final InputStream stream)
-    throws ParseException
+    throws ParsingException
   {
     Objects.requireNonNull(source, "source");
     Objects.requireNonNull(stream, "stream");

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,30 +14,42 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.anethum.common;
+package com.io7m.anethum.api;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
- * The severity of a parser status event.
+ * An exception due to parse errors.
  */
 
-public enum ParseSeverity
+public final class ParsingException extends Exception
 {
-  /**
-   * Parsing encountered an error.
-   */
-
-  PARSE_ERROR,
+  private final List<ParseStatusType> statusValues;
 
   /**
-   * Parsing encountered a warning.
+   * Construct an exception.
+   *
+   * @param message  The main message
+   * @param inErrors The parse errors
    */
 
-  PARSE_WARNING,
+  public ParsingException(
+    final String message,
+    final List<ParseStatusType> inErrors)
+  {
+    super(Objects.requireNonNull(message, "message"));
+    this.statusValues = List.copyOf(
+      Objects.requireNonNull(inErrors, "errors")
+    );
+  }
 
   /**
-   * Parsing produced information.
+   * @return The parse errors
    */
 
-  PARSE_INFO
+  public List<ParseStatusType> statusValues()
+  {
+    return this.statusValues;
+  }
 }
-

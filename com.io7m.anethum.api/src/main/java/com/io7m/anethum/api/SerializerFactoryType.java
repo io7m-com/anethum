@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> https://www.io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,8 +15,6 @@
  */
 
 package com.io7m.anethum.api;
-
-import com.io7m.anethum.common.SerializeException;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -133,14 +131,14 @@ public interface SerializerFactoryType<C, T, S extends SerializerType<T>>
    * @param value   The value
    *
    * @throws IOException        On I/O errors
-   * @throws SerializeException On serialization errors
+   * @throws SerializationException On serialization errors
    */
 
   default void serializeFileWithContext(
     final C context,
     final Path file,
     final T value)
-    throws IOException, SerializeException
+    throws IOException, SerializationException
   {
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(value, "value");
@@ -158,13 +156,13 @@ public interface SerializerFactoryType<C, T, S extends SerializerType<T>>
    * @param value The value
    *
    * @throws IOException        On I/O errors
-   * @throws SerializeException On serialization errors
+   * @throws SerializationException On serialization errors
    */
 
   default void serializeFile(
     final Path file,
     final T value)
-    throws IOException, SerializeException
+    throws IOException, SerializationException
   {
     Objects.requireNonNull(file, "file");
     Objects.requireNonNull(value, "value");
@@ -179,14 +177,14 @@ public interface SerializerFactoryType<C, T, S extends SerializerType<T>>
    * @param stream The stream
    * @param value  The value
    *
-   * @throws SerializeException On serialization errors
+   * @throws SerializationException On serialization errors
    */
 
   default void serialize(
     final URI source,
     final OutputStream stream,
     final T value)
-    throws SerializeException
+    throws SerializationException
   {
     Objects.requireNonNull(source, "source");
     Objects.requireNonNull(stream, "stream");

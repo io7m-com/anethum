@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,41 +14,30 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.anethum.common;
-
-import java.util.Objects;
+package com.io7m.anethum.api;
 
 /**
- * An exception due to serialization errors.
+ * The severity of a parser status event.
  */
 
-public final class SerializeException extends Exception
+public enum ParseSeverity
 {
   /**
-   * Construct an exception.
-   *
-   * @param message The message
+   * Parsing encountered an error.
    */
 
-  public SerializeException(
-    final String message)
-  {
-    super(Objects.requireNonNull(message, "message"));
-  }
+  PARSE_ERROR,
 
   /**
-   * Construct an exception.
-   *
-   * @param message The message
-   * @param cause   The cause
+   * Parsing encountered a warning.
    */
 
-  public SerializeException(
-    final String message,
-    final Throwable cause)
-  {
-    super(
-      Objects.requireNonNull(message, "message"),
-      Objects.requireNonNull(cause, "cause"));
-  }
+  PARSE_WARNING,
+
+  /**
+   * Parsing produced information.
+   */
+
+  PARSE_INFO
 }
+
