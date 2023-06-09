@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,18 +14,41 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+package com.io7m.anethum.api;
+
+import java.util.Objects;
+
 /**
- * Generic parser API (Common types)
+ * An exception due to serialization errors.
  */
 
-module com.io7m.anethum.common
+public final class SerializationException extends Exception
 {
-  requires static org.osgi.annotation.bundle;
-  requires static org.osgi.annotation.versioning;
-  requires static org.immutables.value;
-  requires static com.io7m.immutables.style;
+  /**
+   * Construct an exception.
+   *
+   * @param message The message
+   */
 
-  requires transitive com.io7m.jlexing.core;
+  public SerializationException(
+    final String message)
+  {
+    super(Objects.requireNonNull(message, "message"));
+  }
 
-  exports com.io7m.anethum.common;
+  /**
+   * Construct an exception.
+   *
+   * @param message The message
+   * @param cause   The cause
+   */
+
+  public SerializationException(
+    final String message,
+    final Throwable cause)
+  {
+    super(
+      Objects.requireNonNull(message, "message"),
+      Objects.requireNonNull(cause, "cause"));
+  }
 }

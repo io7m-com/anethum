@@ -23,7 +23,8 @@ module com.io7m.anethum.api
   requires static org.osgi.annotation.bundle;
   requires static org.osgi.annotation.versioning;
 
-  requires com.io7m.anethum.common;
+  requires transitive com.io7m.jlexing.core;
+  requires transitive com.io7m.seltzer.api;
 
   exports com.io7m.anethum.api;
 }

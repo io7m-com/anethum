@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2023 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,8 +16,6 @@
 
 package com.io7m.anethum.api;
 
-import com.io7m.anethum.common.ParseException;
-
 import java.io.Closeable;
 
 /**
@@ -33,9 +31,9 @@ public interface ParserType<T> extends Closeable
    *
    * @return A parsed value
    *
-   * @throws ParseException On parse errors
+   * @throws ParsingException On parse errors
    */
 
   T execute()
-    throws ParseException;
+    throws ParsingException;
 }
