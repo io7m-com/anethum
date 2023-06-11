@@ -8,12 +8,12 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor.full</artifactId>
-    <version>7.5.0</version>
+    <version>7.7.0</version>
   </parent>
 
   <groupId>com.io7m.anethum</groupId>
   <artifactId>com.io7m.anethum</artifactId>
-  <version>1.0.0-beta0001</version>
+  <version>1.0.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.anethum</name>
@@ -27,7 +27,7 @@
 
   <properties>
     <com.io7m.xstructural.version>1.8.0</com.io7m.xstructural.version>
-    <io7m.api.previousVersion>1.0.0-beta0001</io7m.api.previousVersion>
+    <io7m.api.previousVersion>1.0.0</io7m.api.previousVersion>
     <junit.version>5.9.3</junit.version>
     <jqwik.version>1.7.3</jqwik.version>
   </properties>
@@ -109,7 +109,7 @@
       <dependency>
         <groupId>com.io7m.seltzer</groupId>
         <artifactId>com.io7m.seltzer.api</artifactId>
-        <version>1.0.0-beta0001</version>
+        <version>1.0.0</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.xstructural</groupId>
