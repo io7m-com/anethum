@@ -11,21 +11,27 @@
     <groupId>com.io7m.anethum</groupId>
     <version>1.1.0</version>
   </parent>
-  <artifactId>com.io7m.anethum.api</artifactId>
+  <artifactId>com.io7m.anethum.slf4j</artifactId>
 
   <packaging>jar</packaging>
-  <name>com.io7m.anethum.api</name>
-  <description>Generic parser API (API specification)</description>
+  <name>com.io7m.anethum.slf4j</name>
+  <description>Generic parser API (SLF4J)</description>
   <url>https://www.io7m.com/software/anethum</url>
 
   <dependencies>
     <dependency>
-      <groupId>com.io7m.jlexing</groupId>
-      <artifactId>com.io7m.jlexing.core</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.anethum.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.io7m.seltzer</groupId>
-      <artifactId>com.io7m.seltzer.api</artifactId>
+      <groupId>com.io7m.jlexing</groupId>
+      <artifactId>com.io7m.jlexing.core</artifactId>
     </dependency>
 
     <dependency>

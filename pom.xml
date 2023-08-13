@@ -8,12 +8,12 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor.full</artifactId>
-    <version>7.7.0</version>
+    <version>8.0.0-beta0001</version>
   </parent>
 
   <groupId>com.io7m.anethum</groupId>
   <artifactId>com.io7m.anethum</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.anethum</name>
@@ -22,6 +22,7 @@
 
   <modules>
     <module>com.io7m.anethum.api</module>
+    <module>com.io7m.anethum.slf4j</module>
     <module>com.io7m.anethum.tests</module>
   </modules>
 
@@ -89,7 +90,7 @@
       <dependency>
         <groupId>com.io7m.primogenitor</groupId>
         <artifactId>com.io7m.primogenitor.support</artifactId>
-        <version>7.7.0</version>
+        <version>8.0.0-beta0001</version>
       </dependency>
       <dependency>
         <groupId>org.osgi</groupId>
@@ -115,6 +116,16 @@
         <groupId>com.io7m.xstructural</groupId>
         <artifactId>com.io7m.xstructural.cmdline</artifactId>
         <version>${com.io7m.xstructural.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.7</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.4.8</version>
       </dependency>
 
       <!-- Test suite. -->
