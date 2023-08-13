@@ -146,4 +146,30 @@ public final class ParseStatusTest
         .build()
     );
   }
+
+  /**
+   * Logging works as expected.
+   *
+   * @param severity  The parse severity
+   * @param errorCode The error code
+   * @param message   A message
+   */
+
+  @Property
+  public void testLoggingWithAll(
+    final @ForAll ParseSeverity severity,
+    final @ForAll String errorCode,
+    final @ForAll String message,
+    final @ForAll int line,
+    final @ForAll Map<String, String> attributes)
+  {
+    ParseStatusLogging.logWithAll(
+      LOG,
+      ParseStatus.builder(errorCode, message)
+        .withSeverity(severity)
+        .withLexical(LexicalPosition.of(line, 0, Optional.empty()))
+        .withAttributes(attributes)
+        .build()
+    );
+  }
 }

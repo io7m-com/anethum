@@ -111,4 +111,58 @@ public final class ParseStatusLogging
       }
     }
   }
+
+  /**
+   * Log a status message.
+   *
+   * @param logger The logger
+   * @param status The status
+   */
+
+  public static void logWithAll(
+    final Logger logger,
+    final ParseStatus status)
+  {
+    switch (status.severity()) {
+      case PARSE_INFO -> {
+        logger.info(
+          "{}:{}: {}: {}",
+          Integer.valueOf(status.lexical().line()),
+          Integer.valueOf(status.lexical().column()),
+          status.errorCode(),
+          status.message()
+        );
+
+        for (final var entry : status.attributes().entrySet()) {
+          logger.info("  {}: {}", entry.getKey(), entry.getValue());
+        }
+      }
+      case PARSE_WARNING -> {
+        logger.warn(
+          "{}:{}: {}: {}",
+          Integer.valueOf(status.lexical().line()),
+          Integer.valueOf(status.lexical().column()),
+          status.errorCode(),
+          status.message()
+        );
+
+        for (final var entry : status.attributes().entrySet()) {
+          logger.warn("  {}: {}", entry.getKey(), entry.getValue());
+        }
+      }
+      case PARSE_ERROR -> {
+        logger.error(
+          "{}:{}: {}: {}",
+          Integer.valueOf(status.lexical().line()),
+          Integer.valueOf(status.lexical().column()),
+          status.errorCode(),
+          status.message()
+        );
+
+        for (final var entry : status.attributes().entrySet()) {
+          logger.error("  {}: {}", entry.getKey(), entry.getValue());
+        }
+      }
+    }
+  }
 }
