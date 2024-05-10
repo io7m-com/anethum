@@ -13,7 +13,7 @@
 
   <groupId>com.io7m.anethum</groupId>
   <artifactId>com.io7m.anethum</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.anethum</name>
@@ -28,7 +28,7 @@
 
   <properties>
     <!-- Configuration. -->
-    <io7m.api.previousVersion>1.1.0</io7m.api.previousVersion>
+    <io7m.api.previousVersion>1.1.1</io7m.api.previousVersion>
     <io7m.java.targetJavaVersion>17</io7m.java.targetJavaVersion>
 
     <!-- io7m dependencies. -->
