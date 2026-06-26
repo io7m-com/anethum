@@ -1,12 +1,68 @@
-ERROR com.io7m.ghrepostools.Main : The specified command does not exist.
-  Command    : README
-  Error Code : command-nonexistent
+anethum
+===
 
-DEBUG com.io7m.ghrepostools.Main : Exception: 
-com.io7m.quarrel.core.QException: The specified command does not exist.
-	at com.io7m.quarrel.core.QApplication.parseExpanded(QApplication.java:244)
-	at com.io7m.quarrel.core.QApplication.parse(QApplication.java:152)
-	at com.io7m.quarrel.core.QApplicationType.run(QApplicationType.java:94)
-	at com.io7m.ghrepostools.Main.run(Main.java:126)
-	at com.io7m.ghrepostools.Main.mainExitless(Main.java:110)
-	at com.io7m.ghrepostools.Main.main(Main.java:95)
+[![Maven Central](https://img.shields.io/maven-central/v/com.io7m.anethum/com.io7m.anethum.svg?style=flat-square)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.io7m.anethum%22)
+[![Maven Central (snapshot)](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fcom%2Fio7m%2Fanethum%2Fcom.io7m.anethum%2Fmaven-metadata.xml&style=flat-square)](https://central.sonatype.com/repository/maven-snapshots/com/io7m/anethum/)
+[![Codecov](https://img.shields.io/codecov/c/github/io7m-com/anethum.svg?style=flat-square)](https://codecov.io/gh/io7m-com/anethum)
+![Java Version](https://img.shields.io/badge/17-java?label=java&color=e65cc3)
+
+![com.io7m.anethum](./src/site/resources/anethum.jpg?raw=true)
+
+| JVM | Platform | Status |
+|-----|----------|--------|
+| OpenJDK (Temurin) Current | Linux | [![Build (OpenJDK (Temurin) Current, Linux)](https://img.shields.io/github/actions/workflow/status/io7m-com/anethum/main.linux.temurin.current.yml)](https://www.github.com/io7m-com/anethum/actions?query=workflow%3Amain.linux.temurin.current)|
+| OpenJDK (Temurin) LTS | Linux | [![Build (OpenJDK (Temurin) LTS, Linux)](https://img.shields.io/github/actions/workflow/status/io7m-com/anethum/main.linux.temurin.lts.yml)](https://www.github.com/io7m-com/anethum/actions?query=workflow%3Amain.linux.temurin.lts)|
+| OpenJDK (Temurin) Current | Windows | [![Build (OpenJDK (Temurin) Current, Windows)](https://img.shields.io/github/actions/workflow/status/io7m-com/anethum/main.windows.temurin.current.yml)](https://www.github.com/io7m-com/anethum/actions?query=workflow%3Amain.windows.temurin.current)|
+| OpenJDK (Temurin) LTS | Windows | [![Build (OpenJDK (Temurin) LTS, Windows)](https://img.shields.io/github/actions/workflow/status/io7m-com/anethum/main.windows.temurin.lts.yml)](https://www.github.com/io7m-com/anethum/actions?query=workflow%3Amain.windows.temurin.lts)|
+
+## Repository Relocation
+
+Development of this project has moved to an
+[open-source but not open-contribution](https://sqlite.org/copyright.html#notopencontrib)
+model.
+
+Source code and commits will remain publicly available perpetually, but issues
+and/or pull requests will be rejected and/or ignored. Additionally, this project
+will now only be available via a read-only mirror at:
+
+  https://codeberg.org/io7m-com/anethum
+
+
+## anethum
+
+A common API for parsers and serializers in [io7m](https://www.io7m.com)
+packages.
+
+### Features
+
+  * Standardized interface for parsers.
+  * Standardized interface for serializers.
+  * Parse errors are [structured errors](https://www.io7m.com/software/seltzer).
+  * Written in pure Java 17.
+  * [OSGi](https://www.osgi.org/) ready.
+  * [JPMS](https://en.wikipedia.org/wiki/Java_Platform_Module_System) ready.
+  * ISC license.
+  * High-coverage automated test suite.
+
+### Motivation
+
+[io7m](https://www.io7m.com) packages expose many different parsers and
+serializers. The `anethum` package attempts to define a consistent and
+strongly-typed API specification that these parsers and serializers can
+implement in order to provide a uniform user experience between all of the
+different packages.
+
+### Building
+
+```
+$ mvn clean verify
+```
+
+### Usage
+
+Parsers should implement the `ParserFactoryType` and `ParserType`
+interfaces.
+
+Serializers should implement the `SerializerFactoryType` and `SerializerType`
+interfaces.
+
